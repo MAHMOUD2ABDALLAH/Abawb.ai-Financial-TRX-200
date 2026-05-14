@@ -10,7 +10,7 @@ The dashboard is divided into three main pages, each focusing on a different asp
 
 ## Transaction Overview
 
-<img width="1000" height="700" alt="Transaction Overview 1" src="https://github.com/user-attachments/assets/938e9203-e667-4418-8f28-afa05f1e25be" />
+<img width="1000" height="650" alt="Transaction Overview 1" src="https://github.com/user-attachments/assets/938e9203-e667-4418-8f28-afa05f1e25be" />
 
 ### Key Visuals & Metrics
 
@@ -39,7 +39,7 @@ The dashboard is divided into three main pages, each focusing on a different asp
 
 ## Fraud & Risk Analysis
 
-<img width="1000" height="700" alt="Fraud   Risk Analysis 2" src="https://github.com/user-attachments/assets/d15249ff-69af-4846-8691-d27db0d2f84f" />
+<img width="1000" height="650" alt="Fraud   Risk Analysis 2" src="https://github.com/user-attachments/assets/d15249ff-69af-4846-8691-d27db0d2f84f" />
 
 ### Key Visuals & Metrics
 
@@ -59,7 +59,7 @@ The dashboard is divided into three main pages, each focusing on a different asp
 
 ## Counterparty & Cluster Deep Dive
 
-<img width="1000" height="700" alt="Counterparty   Cluster Deep Dive 3" src="https://github.com/user-attachments/assets/6ac1f4e0-44e1-4b91-a67b-08213520cb99" />
+<img width="1000" height="650" alt="Counterparty   Cluster Deep Dive 3" src="https://github.com/user-attachments/assets/6ac1f4e0-44e1-4b91-a67b-08213520cb99" />
 
 ### Visual Elements
 
