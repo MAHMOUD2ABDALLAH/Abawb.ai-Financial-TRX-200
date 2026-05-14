@@ -1,138 +1,97 @@
-# Financial Transaction Annotation — TRX-200 Case Study
+# BI Abwab.ai TRX-200 – Financial Transaction Analysis Dashboard
 
 ## Overview
 
-This repository contains a structured **financial transaction annotation case study** built in Microsoft Excel.  
-The workbook (`Mahmoud Abdallah - Annotation -200 TRX.xlsx`) holds **200 real-world bank transactions** and demonstrates how to systematically label each transaction using a centralized classification scheme.
+This repository contains a Power BI dashboard designed for the in-depth analysis of financial transaction data. The primary objectives are to visualize transaction flows, identify counterparty risks, and detect potential fraud patterns. The project is built from an annotated financial dataset (`Financial Annotation.xlsx`) and follows a systematic approach to data modeling and visualization as detailed in a companion guide.
 
-The goal is to produce a fully annotated dataset that can be used for:
-- Financial auditing and reporting
-- Accounting system training / rule‑engine development
-- Machine‑learning model training for transaction categorisation
-- Business intelligence dashboards
+The dashboard is divided into three main pages, each focusing on a different aspect of the transaction data.
 
 ---
 
-## Repository Contents
+## Transaction Overview
 
-| File | Description |
-|------|-------------|
-| `Mahmoud Abdallah - Annotation -200 TRX.xlsx` | Main Excel workbook with three sheets |
-| `README.md` | This file — project overview and annotation guide |
+<img width="1000" height="700" alt="Transaction Overview 1" src="https://github.com/user-attachments/assets/938e9203-e667-4418-8f28-afa05f1e25be" />
 
----
+### Key Visuals & Metrics
 
-## Workbook Structure
+| Metric | Value |
+|---|---|
+| **Total Debit** | 1.60 Million SAR |
+| **Net Flow** | 8.24 Million SAR |
+| **Transaction Count** | 200 |
+| **Avg Transaction Amount** | 57.17K SAR |
 
-The workbook contains three sheets:
+### Visual Elements
 
-### 1. `task` (Main Annotation Sheet)
-**200 rows × 35 columns**  
-Each row represents a single bank transaction.  
-The first 21 columns contain raw transaction data.  
-The remaining **14 columns** are the annotation target:
+- **Transaction Type Distribution:** A bar chart displays the frequency of various transaction types, such as:
+    - Internal Transfer (CIB) – **44 transactions**
+    - Incoming Fast Transfer (RIYAD BANK) – **41 transactions**
+    - Fast Outgoing Transfer (CIB via Alinma) – **33 transactions**
+    - And various bill payments, payroll deductions, and rejected transfers.
 
-| # | Column | Purpose |
-|---|--------|---------|
-| V | `bank_system_classification` | High‑level banking channel (Transfer, SADAD, Payroll, Cash, etc.) |
-| W | `bank_system_subclassification` | Sub‑type (Local Transfer, External FI, Same FI, Expat Fees, etc.) |
-| X | `Bank System Confidence` | Confidence in bank‑system label (High / Medium / Low) |
-| Y | `Bank System Reason` | Explanation for bank‑system classification |
-| Z | `Entity` | Counterparty entity type (Shareholder, Supplier, Government, etc.) |
-| AA | `Entity Nature of Business` | Industry / sector of the counterparty |
-| AB | `scraped_description` | Manually scraped external data (blank by default) |
-| AC | `relationship` | Relationship to the borrower (Supplier, Customer, Lender, etc.) |
-| AD | `Relationship Confidence` | Confidence in relationship label (High / Medium / Low) |
-| AE | `Relationship Reason` | Explanation for relationship label |
-| AF | `Accounting_Classification` | Accounting category (Revenue, COGS, OPEX, ZATCA, Other Income) |
-| AG | `Accounting_Subclassification` | Detailed account (Payroll, Electricity, Inventory Purchase, etc.) |
-| AH | `Accounting Label Confidence` | Confidence in accounting label |
-| AI | `Accounting Label Reason` | Explanation for accounting label |
+- **Top Counterparties:** A list shows the sum of amounts for key counterparties like *Abdul Latif Jameel United Finance*, *Abdullah Abdulkarim Al Sudais CPA*, and *Advanced Finance and Maintenance Co*.
 
-### 2. `Centralized Labels`
-A reference library of all valid labels used in the annotation.  
-It acts as both a **data‑validation source** and a quick‑reference dictionary.  
-Labels are organised into the same 14 categories plus a few extras (e.g., `bank_system_fi_classification`).
+- **Directional Breakdown:** A pie chart visualizes the proportion of **Credit (34%)** vs. **Debit (66%)** transactions.
 
-### 3. `Description Splitting`
-A helper sheet that extracts and splits the `Transaction Type` / `Provider / Payer / Beneficiary` data from the raw bank statement format.  
-Useful for understanding how the raw data was pre‑processed.
+- **Monthly Trend:** A line chart tracks the **Sum of Amount** for Credit and Debit transactions from March to June 2023.
 
 ---
 
-## Annotation Logic
+## Fraud & Risk Analysis
 
-The annotation uses **formula‑based rules** that examine:
-- Transaction type (Fast Outgoing Transfer, Bill Payment, Payroll, etc.)
-- Direction (Debit / Credit)
-- Counterparty name (Provider / Payer / Beneficiary)
-- Amount, fees, and bank routing information
+<img width="1000" height="700" alt="Fraud   Risk Analysis 2" src="https://github.com/user-attachments/assets/d15249ff-69af-4846-8691-d27db0d2f84f" />
 
-**Key classification patterns:**
+### Key Visuals & Metrics
 
-| Transaction Pattern | Classification |
-|---------------------|----------------|
-| `Fast Outgoing Transfer (CIB)` | Transfer → Local Transfer |
-| `Incoming Fast Transfer (RIYAD BANK)` | Transfer → External FI |
-| `Bill Payment 020` to ZATCA | SADAD → Government / Zakat |
-| `Bill Payment 060` to GOSI | SADAD → Social Insurance |
-| `Bill Payment 050` to Ministry | SADAD → Government Fees |
-| `Payroll Deduction (BPM)` | Payroll → Payroll Expense |
-| `Expatriate Services Payment` | SADAD → Expat Fees |
-| `Internal Transfer (CIB)` | Transfer → Same FI |
-| `Cash Deposit` | Cash → Deposit |
-| `Rejected Fast Transfer` | Transfer → Failed |
+- **High-Risk Transactions Table:** A detailed table lists high-value or suspicious transactions, including:
+    - **National Company for Building and Marketing** – Multiple large transfers (e.g., 800,000 SAR, 500,000 SAR) flagged with **High** or **Medium** FraudFlag and RiskScore of 5 or 3.
+    - **Unknown Sender** – A rejected transfer of 31,653.70 SAR flagged **Medium**.
+    - **Rejected Transfer (Returned)** – Multiple smaller returned transfers flagged **Medium**.
+    - **Total high-risk amount tracked:** **2,425,056.00 SAR**
 
-**Confidence assignment rules:**
-- **High**: Direct matches to shareholders, government entities, banks, same‑company transfers
-- **Medium**: Name‑based matches to known suppliers, customers, service providers
-- **Low**: Unknown counterparties or incomplete data
+- **Balance By Month:** A bar chart showing the net change in balance (Delta) by month. March shows the highest positive Delta (8.3M SAR), while June shows the lowest (0.9M SAR).
+
+- **Amount vs Balance by Risk Level:** This visual correlates the transaction amount with the assigned risk level (Low, Medium, High, Very High, Extremely High).
+
+- **Risk Distribution Over Time:** A line chart tracks the count of High, Medium, and Low FraudFlag transactions from January to June 2023. February saw the highest number of flagged transactions (38).
 
 ---
 
-## KSA Government Entities Covered
+## Counterparty & Cluster Deep Dive
 
-The dataset includes transactions with several KSA government bodies:
+<img width="1000" height="700" alt="Counterparty   Cluster Deep Dive 3" src="https://github.com/user-attachments/assets/6ac1f4e0-44e1-4b91-a67b-08213520cb99" />
 
-| Government Entity | Label |
-|-------------------|-------|
-| General Authority of Zakat and Tax (ZATCA) | Tax Authority |
-| General Organization for Social Insurance (GOSI) | Social Insurance Agency |
-| Ministry of Human Resources and Social Development | Government / Regulatory Agency |
-| Expatriate Services (Various IDs) | Government |
+### Visual Elements
 
----
+- **Transaction Types by Volume:** A pie chart breaks down the percentage volume of different transaction types (e.g., largest slice at 16.5%, multiple slices between 1.5% and 7.5%).
 
-## How to Use
+- **Risk Distribution by Cluster:** A bar chart visualizes the average amount per cluster categorized by FraudFlag (High, Low, Medium). This helps identify which clusters are most associated with risky behavior.
 
-1. Open the `.xlsx` file in Microsoft Excel (formulas will **not** recalculate correctly in Google Sheets).
-2. The `task` sheet columns V–AI are automatically populated via formulas.
-3. To extend the annotation to new transactions:
-   - Copy the formulas down from the last annotated row.
-   - Review the six “Reason” columns (`Y`, `AE`, `AI`) and adjust any that need human input.
-4. To modify the label library, add/edit entries in the `Centralized Labels` sheet.
+- **Flow Analysis:** A Sankey or flow diagram illustrates the movement of funds between entities, tracing paths like `Expatriate Services Payment` to `Payroll Project` and various `Fast Outgoing Transfer` routes.
+
+- **Counterparty Transaction Matrix:** A table provides a detailed debit vs. credit analysis for key counterparties.
+    - **National Company for Building and Marketing** – **9,445,000.00 SAR** in both Debit and Credit, flagged **High Risk**.
+    - Other counterparties like *Interhealth Medical Company*, *Saudi Vetonit*, and *Al Jazeera Paint Factory Company* show significant debit activity.
 
 ---
 
-## Data Source
+## Project File Structure
 
-The raw transactions are sourced from **Alinma Bank** corporate account statements for **RS Infratec Saudi Ltd.**, a construction and real‑estate contracting company in Saudi Arabia.
+The project directory is organized as follows:
 
-Transaction period: **January 2023 – June 2023**
-
----
-
-## License
-
-This project is intended for educational and internal use.  
-For any commercial use, please contact the repository owner.
-
----
-
-## Contact
-
-**Mahmoud Abdallah**  
-**Mahmoud_abdallah20@outlook.com**
-
-<img width="200" height="200" alt="logo" src="https://github.com/user-attachments/assets/9cc0136d-f306-4e7b-8419-e70af5ef950a" />
-
+```text
+BI-Abwab.ai-TRX-200/
+│
+├── data/
+│   └── Financial Annotation.xlsx          # Raw annotated transaction data
+│
+├── dashboards/
+│   ├── Transaction Overview 1.png         # Page 1 screenshot
+│   ├── Fraud & Risk Analysis 2.png        # Page 2 screenshot
+│   └── Counterparty & Cluster Deep Dive 3.png # Page 3 screenshot
+│
+├── docs/
+│   └── build_guide.md                     # Step-by-step dashboard creation guide (from chat)
+│
+├── README.md                              # This file
+└── .gitignore
