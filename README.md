@@ -133,8 +133,3 @@ For any commercial use, please contact the repository owner.
 
 **Mahmoud Abdallah**  
 **Mahmoud_abdallah20@outlook.com**
-
-
-<img width="100" height="100" alt="abwab.ai" src="./Abwab-ai.svg" />
-
-
